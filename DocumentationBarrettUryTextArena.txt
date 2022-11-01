@@ -1,0 +1,120 @@
+UML Diagrams: https://drive.google.com/file/d/1zKEDQy3diqQgTJlw_x4yRiECcQQKDngZ/view?usp=sharing
+
+Description of game: A text-based arena fighter. There is One player with 4 weapons to choose from. 
+The 4th weapon unlocks an alternative path in the game. Several monsters and a hidden boss
+
+Outline of events (including any "win" conditions, and variables that track events).
+Rules --> Setup --> Round 1 --> Round 2 --> Round 3 --> Round 4 --> Credits
+(If choosing ???): Rules --> Setup --> Round 1 --> Round 2 --> Round 3 --> Round 4 --> Round 5 --> Credits
+
+Note: If a player successfully clears a round, they are brought to a Rest Area where they can heal, 
+if they lose they get a game over message and are forced to quit the application
+
+
+List of the three variables that impact game play, and how they change the game experience for the player -
+Weapon: This determines playstyle and alternative routes
+parryNum: This determines their parry rate. This raises when the player chooses not to attack, but parry
+health: This tells a player how much health they have left
+
+Credit for any open-source code, collaboration, or assistance received:
+Soundplayer stuff was given to me by Emre
+Thread Sleep:  //https://learn.microsoft.com/en-us/dotnet/api/system.threading.thread.sleep?view=net-6.0
+Colors: //http://programmingisfun.com/console-application-color/
+Music Composed by Jun Ishikawa
+Music Arranged by Silva Gunner
+
+
+
+How your project demonstrates your knowledge of inheritance, polymorphism, and encapsulation:
+
+Inheritance: Different types of enemy classes. Same basic abilities, each have their own unique attacks
+
+Polymorphism: Weapon Class. Has a way to differentiate weapons
+
+ internal class Skeleton : Enemy
+    {
+        public Skeleton(string name, Weapon eWeapon, int health, int maxHealth) :
+            base(name, "Skeleton", eWeapon, health, maxHealth, "Bludgeoning")
+        {
+
+        }
+
+        public override void EnemyAction(Player protag)
+        {
+            if (protag.ReturnHealth() > 0)
+            {
+
+                if (!offBalance)
+                {
+                    Attack(protag);
+                }
+                else
+                {
+                    Console.WriteLine(name + " Regained it's composition");
+                    offBalance = false;
+                }
+
+            }
+        }
+    }
+
+public Weapon()
+        {
+
+        }
+
+        public Weapon(string weapName, int force, int acc, string dmg)
+        {
+            name = weapName;
+            power = force;  
+            accruacy = acc; 
+            damageType = dmg;   
+
+        }
+
+Encapsulation: Parry Numbers and Mage Knight Attacks
+
+parryNum = 0;
+
+public void Defend()
+        {
+            parryNum = 66;
+
+        }
+
+else if (chargeAttack == 1 && hasParried)
+            {
+                Attack(protag);
+                Console.WriteLine($"{protag.GetName()} can't move!");
+                Attack(protag);
+                charge = 0;
+                chargeAttack = 0;
+                hasParried = false;
+            }
+            else if (chargeAttack == 1 && !hasParried)
+            {
+                Console.WriteLine($"The {name} waited to parry...\nBut nothing happened");
+                charge = 0;
+                chargeAttack = 0;
+            }
+            else if (chargeAttack == 2)
+            {
+                Console.WriteLine($"The {eWeapon.ReturnName()} glows with power!");
+                SpecialAttack(protag);
+                charge = 0;
+                chargeAttack = 0;
+            }
+            else if (chance == 1)
+            {
+
+                Console.WriteLine(this.name + " is readying their attack");
+                charge = 1;
+                chargeAttack = 1;
+
+            }
+            else if (chance == 2)
+            {
+                Console.WriteLine(this.name + " is readying their attack");
+                charge = 1;
+                chargeAttack = 2;
+            }
